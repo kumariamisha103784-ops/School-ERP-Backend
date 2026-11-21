@@ -7,6 +7,9 @@ const Admin = require("../models/Admin");
 // ===============================
 const registerAdmin = async (req, res) => {
   try {
+    console.log("===== REGISTER API CALLED =====");
+console.log(req.body);
+
     const { name, email, password } = req.body;
 
     // Check required fields

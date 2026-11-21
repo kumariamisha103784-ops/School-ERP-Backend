@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 // Upload Folder
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// Routes
+// API Routes
 app.use("/api/students", studentRoutes);
 app.use("/api/teachers", teacherRoutes);
 app.use("/api/attendance", attendanceRoutes);
@@ -39,12 +39,15 @@ app.use("/api/classes", classRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 
-// Test Route
-app.get("/", (req, res) => {
-  res.send("Backend is Running...");
+// ===== React Build =====
+app.use(express.static(path.join(__dirname, "build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 const PORT = process.env.PORT || 5000;
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
